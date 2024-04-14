@@ -28,6 +28,15 @@ Requirements
     Wait for the server response.
     View the server response displayed as a Snackbar message with a green or red background indicating success or failure, respectively.
 
+## Screenshots
+
+| Screenshot 1 | Screenshot 2 |
+|--------------|--------------|
+| ![Screenshot 1](screenshots/Screenshot_20240414_053508.png) | ![Screenshot 2](screenshots/Screenshot_20240414_053635.png) |
+| ![Screenshot 1](screenshots/Screenshot_20240414_053616.png) | ![Screenshot 2](screenshots/Screenshot_20240414_053635.png) |
+
+
+
 ## Dependencies
 
     OkHttp: Library for making HTTP requests.
