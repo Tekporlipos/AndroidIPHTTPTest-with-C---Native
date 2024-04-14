@@ -1,16 +1,19 @@
 package io.cloudonix.androidiphttptest;
 
+import static io.cloudonix.androidiphttptest.helper.HelperFunctions.isValidIPAddress;
 import static io.cloudonix.androidiphttptest.helper.SnackBarHandler.showSnackBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private final String TAG = "MainActivity_HTTP_REQUEST";
     private TextView resultTextView;
-    private ProgressBar progressBar;
+    private LinearLayout progressBar;
     private Button startButton;
 
     @Override
@@ -60,7 +63,13 @@ public class MainActivity extends AppCompatActivity {
     }
     private void startTask() {
         reset(true);
-        sendIPAddressToServer(ipAddressFromJNI());
+        final String ip =ipAddressFromJNI();
+        if (isValidIPAddress(ip)){
+            sendIPAddressToServer(ip);
+        }else {
+            showSnackBar("Sorry!, we got an invalid IP Address.", R.color.failureColor,MainActivity.this);
+        }
+        Log.i(TAG, "IP Address: "+ip);
     }
 
     private void sendIPAddressToServer(String ipAddress) {
@@ -68,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
         JSONObject jsonBody = httpRequestHandler.createJsonBody(ipAddress);
         RequestBody requestBody = httpRequestHandler.createRequestBody(jsonBody);
         Request request = httpRequestHandler.createRequest(requestBody,this);
-        sendRequest(request);
+        sendRequest(request,ipAddress);
 
     }
 
-    private void sendRequest(Request request) {
+    private void sendRequest(Request request,String ipAddress) {
         OkHttpClient client = new OkHttpClient();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -84,12 +93,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                handleResponse(response,MainActivity.this);
+                handleResponse(response,MainActivity.this,ipAddress);
             }
         });
     }
 
-    private void handleResponse(Response response,Context context) {
+    private void handleResponse(Response response,Context context,String ipAddress) {
         try (ResponseBody responseBody = response.body()) {
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected code " + response);
@@ -103,7 +112,11 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     showSnackBar("Server response: NAT FALSE", R.color.failureColor,context);
                 }
-                runOnUiThread(()->resultTextView.setText(jsonResponse.toString()));
+                runOnUiThread(()-> {
+                    resultTextView.setText(ipAddress);
+                    Drawable drawable = ResourcesCompat.getDrawable(getResources(), nat?R.drawable.green_okay:R.drawable.red_not_okay, null);
+                    resultTextView.setCompoundDrawablesWithIntrinsicBounds(drawable,null,null,null);
+                });
             } else {
                 showSnackBar("Empty response from server", R.color.failureColor,context);
             }
