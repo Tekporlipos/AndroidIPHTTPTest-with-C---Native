@@ -40,11 +40,11 @@ const char* IPAddressFinder::getIPAddress() {
                         return ipv6;
                 }
             } else if (ifa->ifa_addr->sa_family == AF_INET) {
-                auto *ipv4Addr = reinterpret_cast<struct sockaddr_in*>(ifa->ifa_addr);
-                if (isPublicIPv4(&ipv4Addr->sin_addr)) {
-                    publicIPv4 = inet_ntoa(ipv4Addr->sin_addr);
-                } else if (!nonLoopBackIPv4 && ipv4Addr->sin_addr.s_addr != htonl(INADDR_LOOPBACK)) {
-                    nonLoopBackIPv4 = inet_ntoa(ipv4Addr->sin_addr);
+                auto *ipv4Address = reinterpret_cast<struct sockaddr_in*>(ifa->ifa_addr);
+                if (isPublicIPv4(&ipv4Address->sin_addr)) {
+                    publicIPv4 = inet_ntoa(ipv4Address->sin_addr);
+                } else if (!nonLoopBackIPv4 && ipv4Address->sin_addr.s_addr != htonl(INADDR_LOOPBACK)) {
+                    nonLoopBackIPv4 = inet_ntoa(ipv4Address->sin_addr);
                 }
             }
         }

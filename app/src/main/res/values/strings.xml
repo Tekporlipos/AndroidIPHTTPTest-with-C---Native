@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android IP HTTP Test</string>
+    <string name="server_url">https://s7om3fdgbt7lcvqdnxitjmtiim0uczux.lambda-url.us-east-2.on.aws/</string>
 </resources>
