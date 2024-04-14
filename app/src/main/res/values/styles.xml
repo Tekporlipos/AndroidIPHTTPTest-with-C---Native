@@ -1,0 +1,11 @@
+<resources>
+    <!-- Custom style for success Snackbar -->
+    <style name="SuccessSnackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:background">@color/successColor</item>
+    </style>
+
+    <!-- Custom style for failure Snackbar -->
+    <style name="FailureSnackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:background">@color/failureColor</item>
+    </style>
+</resources>
