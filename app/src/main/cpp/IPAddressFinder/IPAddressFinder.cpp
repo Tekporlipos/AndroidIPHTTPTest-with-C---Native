@@ -3,7 +3,6 @@
 //
 
 #include "IPAddressFinder.h"
-#pragma once
 bool IPAddressFinder::isGlobalIPv6(const struct sockaddr_in6* addr) {
     return (addr->sin6_addr.s6_addr[0] & 0xe0) == 0x20 &&
            !(addr->sin6_addr.s6_addr[0] == 0xfe &&

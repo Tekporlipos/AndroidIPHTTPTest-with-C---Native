@@ -28,12 +28,16 @@ Requirements
     Wait for the server response.
     View the server response displayed as a Snackbar message with a green or red background indicating success or failure, respectively.
 
+## Download
+
+You can download the latest version of the app from the [app-debug.apk](outputs/apk/debug/app-debug.apk) folder. This APK contains all the features and improvements of the latest release.
+
 ## Screenshots
 
 | Screenshot 1 | Screenshot 2 |
 |--------------|--------------|
-| ![Screenshot 1](screenshots/Screenshot_20240414_053508.png) | ![Screenshot 2](screenshots/Screenshot_20240414_053635.png) |
 | ![Screenshot 1](screenshots/Screenshot_20240414_053616.png) | ![Screenshot 2](screenshots/Screenshot_20240414_053635.png) |
+| ![Screenshot 1](screenshots/Screenshot_20240414_055316.png) | ![Screenshot 2](screenshots/Screenshot_20240414_055447.png) |
 
 
 

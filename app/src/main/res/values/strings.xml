@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Android IP HTTP Test</string>
     <string name="server_url">https://s7om3fdgbt7lcvqdnxitjmtiim0uczux.lambda-url.us-east-2.on.aws/</string>
-    <string name="dummy_ip">0.0.0.0</string>
+    <string name="dummy_ip">127.0.0.1</string>
     <string name="please_wait">Please wait</string>
     <string name="start_process">Start Process</string>
 </resources>
